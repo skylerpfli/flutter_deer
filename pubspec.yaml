@@ -78,6 +78,14 @@ dependencies:
   # 动画效果 https://github.com/xvrh/lottie-flutter
   lottie: ^1.4.1
 
+  flutter_conch_plugin:
+    path: /Users/lipengfei/conch/conch-plugin
+#    hosted:
+#      name: flutter_conch_plugin
+#      url: http://pub.oa.com
+#    version: 1.1.4
+
+
 # https://github.com/simplezhli/flutter_deer/issues/187
 dependency_overrides:
   scrollable_positioned_list: ^0.3.2
@@ -123,6 +131,7 @@ flutter:
     - assets/images/account/
     - assets/images/statistic/
     - assets/lottie/
+    - assets/conch_data/
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
@@ -136,3 +145,7 @@ flutter:
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+conch:
+  outPath: assets/conch_data/
+  symbolBuild: false

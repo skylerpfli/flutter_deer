@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_conch_plugin/annotation/conch_scope.dart';
+import 'package:flutter_conch_plugin/conch_dispatch.dart';
 import 'package:flutter_deer/demo/demo_page.dart';
 import 'package:flutter_deer/home/splash_page.dart';
 import 'package:flutter_deer/net/dio_utils.dart';
@@ -20,7 +22,11 @@ import 'package:provider/provider.dart';
 import 'package:quick_actions/quick_actions.dart';
 import 'package:sp_util/sp_util.dart';
 import 'package:url_strategy/url_strategy.dart';
+import 'package:flutter_deer/main.dart';
 
+bool useConch = true;
+
+@ConchScope()
 Future<void> main() async {
 //  debugProfileBuildsEnabled = true;
 //  debugPaintLayerBordersEnabled = true;
@@ -30,6 +36,15 @@ Future<void> main() async {
   /// 确保初始化完成
   WidgetsFlutterBinding.ensureInitialized();
 
+  if (useConch) {
+    var source = await rootBundle.loadString('assets/conch_data/conch_result.json');
+    ConchDispatch.instance.loadSource(source);
+    return await ConchDispatch.instance.callStaticFun(library: 'package:flutter_deer/main.dart', funcName: 'mainInner');
+  }
+  await mainInner();
+}
+
+mainInner() async {
   /// 去除URL中的“#”(hash)，仅针对Web。默认为setHashUrlStrategy
   /// 注意本地部署和远程部署时`web/index.html`中的base标签，https://github.com/flutter/flutter/issues/69760
   setPathUrlStrategy();
@@ -98,11 +113,7 @@ class MyApp extends StatelessWidget {
       }
 
       quickActions.setShortcutItems(<ShortcutItem>[
-        const ShortcutItem(
-          type: 'demo',
-          localizedTitle: 'Demo',
-          icon: 'flutter_dash_black'
-        ),
+        const ShortcutItem(type: 'demo', localizedTitle: 'Demo', icon: 'flutter_dash_black'),
       ]);
     }
   }
@@ -110,10 +121,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Widget app = MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => ThemeProvider()),
-        ChangeNotifierProvider(create: (_) => LocaleProvider())
-      ],
+      providers: [ChangeNotifierProvider(create: (_) => ThemeProvider()), ChangeNotifierProvider(create: (_) => LocaleProvider())],
       child: Consumer2<ThemeProvider, LocaleProvider>(
         builder: (_, ThemeProvider provider, LocaleProvider localeProvider, __) {
           return _buildMaterialApp(provider, localeProvider);
@@ -122,13 +130,7 @@ class MyApp extends StatelessWidget {
     );
 
     /// Toast 配置
-    return OKToast(
-      backgroundColor: Colors.black54,
-      textPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-      radius: 20.0,
-      position: ToastPosition.bottom,
-      child: app
-    );
+    return OKToast(backgroundColor: Colors.black54, textPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0), radius: 20.0, position: ToastPosition.bottom, child: app);
   }
 
   Widget _buildMaterialApp(ThemeProvider provider, LocaleProvider localeProvider) {
