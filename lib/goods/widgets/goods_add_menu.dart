@@ -6,7 +6,6 @@ import 'package:flutter_deer/util/theme_utils.dart';
 import 'package:flutter_deer/widgets/load_image.dart';
 
 class GoodsAddMenu extends StatefulWidget {
-
   const GoodsAddMenu({
     super.key,
   });
@@ -16,7 +15,6 @@ class GoodsAddMenu extends StatefulWidget {
 }
 
 class _GoodsAddMenuState extends State<GoodsAddMenu> with SingleTickerProviderStateMixin {
-
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
 
@@ -48,7 +46,10 @@ class _GoodsAddMenuState extends State<GoodsAddMenu> with SingleTickerProviderSt
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(right: 12.0),
-          child: LoadAssetImage('goods/jt', width: 8.0, height: 4.0,
+          child: LoadAssetImage(
+            'goods/jt',
+            width: 8.0,
+            height: 4.0,
             color: ThemeUtils.getDarkColor(context, Colours.dark_bg_color),
           ),
         ),
@@ -59,11 +60,16 @@ class _GoodsAddMenuState extends State<GoodsAddMenu> with SingleTickerProviderSt
             onPressed: () {
               NavigatorUtils.push(context, '${GoodsRouter.goodsEditPage}?isAdd=true&isScan=true', replace: true);
             },
-            icon: LoadAssetImage('goods/scanning', width: 16.0, height: 16.0, color: iconColor,),
+            icon: LoadAssetImage(
+              'goods/scanning',
+              width: 16.0,
+              height: 16.0,
+              color: iconColor,
+            ),
             label: const Text('扫码添加'),
             style: TextButton.styleFrom(
-              foregroundColor: Theme.of(context).textTheme.bodyText2?.color,
-              disabledForegroundColor: Theme.of(context).textTheme.bodyText2?.color?.withOpacity(0.12),
+              primary: Theme.of(context).textTheme.bodyText2?.color,
+              onSurface: Theme.of(context).textTheme.bodyText2?.color?.withOpacity(0.12),
               backgroundColor: backgroundColor,
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(8.0), topRight: Radius.circular(8.0)),
@@ -79,11 +85,16 @@ class _GoodsAddMenuState extends State<GoodsAddMenu> with SingleTickerProviderSt
             onPressed: () {
               NavigatorUtils.push(context, '${GoodsRouter.goodsEditPage}?isAdd=true', replace: true);
             },
-            icon: LoadAssetImage('goods/add2', width: 16.0, height: 16.0, color: iconColor,),
+            icon: LoadAssetImage(
+              'goods/add2',
+              width: 16.0,
+              height: 16.0,
+              color: iconColor,
+            ),
             label: const Text('添加商品'),
             style: TextButton.styleFrom(
-              foregroundColor: Theme.of(context).textTheme.bodyText2?.color,
-              disabledForegroundColor: Theme.of(context).textTheme.bodyText2?.color?.withOpacity(0.12),
+              primary: Theme.of(context).textTheme.bodyText2?.color,
+              onSurface: Theme.of(context).textTheme.bodyText2?.color?.withOpacity(0.12),
               backgroundColor: backgroundColor,
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(bottomLeft: Radius.circular(8.0), bottomRight: Radius.circular(8.0)),
@@ -106,6 +117,4 @@ class _GoodsAddMenuState extends State<GoodsAddMenu> with SingleTickerProviderSt
       child: body,
     );
   }
-
-
 }
