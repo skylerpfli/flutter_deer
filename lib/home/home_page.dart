@@ -11,22 +11,20 @@ import 'package:flutter_deer/widgets/load_image.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
-
   const Home({super.key});
 
   @override
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> with RestorationMixin{
-
+class _HomeState extends State<Home> /*with RestorationMixin*/ {
   static const double _imageSize = 25.0;
 
   late List<Widget> _pageList;
   final List<String> _appBarTitles = ['订单', '商品', '统计', '店铺'];
   final PageController _pageController = PageController();
 
-  HomeProvider provider = HomeProvider();
+  ConchHomeProvider provider = ConchHomeProvider();
 
   List<BottomNavigationBarItem>? _list;
   List<BottomNavigationBarItem>? _listDark;
@@ -56,20 +54,52 @@ class _HomeState extends State<Home> with RestorationMixin{
     if (_list == null) {
       const tabImages = [
         [
-          LoadAssetImage('home/icon_order', width: _imageSize, color: Colours.unselected_item_color,),
-          LoadAssetImage('home/icon_order', width: _imageSize, color: Colours.app_main,),
+          LoadAssetImage(
+            'home/icon_order',
+            width: _imageSize,
+            color: Colours.unselected_item_color,
+          ),
+          LoadAssetImage(
+            'home/icon_order',
+            width: _imageSize,
+            color: Colours.app_main,
+          ),
         ],
         [
-          LoadAssetImage('home/icon_commodity', width: _imageSize, color: Colours.unselected_item_color,),
-          LoadAssetImage('home/icon_commodity', width: _imageSize, color: Colours.app_main,),
+          LoadAssetImage(
+            'home/icon_commodity',
+            width: _imageSize,
+            color: Colours.unselected_item_color,
+          ),
+          LoadAssetImage(
+            'home/icon_commodity',
+            width: _imageSize,
+            color: Colours.app_main,
+          ),
         ],
         [
-          LoadAssetImage('home/icon_statistics', width: _imageSize, color: Colours.unselected_item_color,),
-          LoadAssetImage('home/icon_statistics', width: _imageSize, color: Colours.app_main,),
+          LoadAssetImage(
+            'home/icon_statistics',
+            width: _imageSize,
+            color: Colours.unselected_item_color,
+          ),
+          LoadAssetImage(
+            'home/icon_statistics',
+            width: _imageSize,
+            color: Colours.app_main,
+          ),
         ],
         [
-          LoadAssetImage('home/icon_shop', width: _imageSize, color: Colours.unselected_item_color,),
-          LoadAssetImage('home/icon_shop', width: _imageSize, color: Colours.app_main,),
+          LoadAssetImage(
+            'home/icon_shop',
+            width: _imageSize,
+            color: Colours.unselected_item_color,
+          ),
+          LoadAssetImage(
+            'home/icon_shop',
+            width: _imageSize,
+            color: Colours.app_main,
+          ),
         ]
       ];
       _list = List.generate(tabImages.length, (i) {
@@ -88,19 +118,35 @@ class _HomeState extends State<Home> with RestorationMixin{
       const tabImagesDark = [
         [
           LoadAssetImage('home/icon_order', width: _imageSize),
-          LoadAssetImage('home/icon_order', width: _imageSize, color: Colours.dark_app_main,),
+          LoadAssetImage(
+            'home/icon_order',
+            width: _imageSize,
+            color: Colours.dark_app_main,
+          ),
         ],
         [
           LoadAssetImage('home/icon_commodity', width: _imageSize),
-          LoadAssetImage('home/icon_commodity', width: _imageSize, color: Colours.dark_app_main,),
+          LoadAssetImage(
+            'home/icon_commodity',
+            width: _imageSize,
+            color: Colours.dark_app_main,
+          ),
         ],
         [
           LoadAssetImage('home/icon_statistics', width: _imageSize),
-          LoadAssetImage('home/icon_statistics', width: _imageSize, color: Colours.dark_app_main,),
+          LoadAssetImage(
+            'home/icon_statistics',
+            width: _imageSize,
+            color: Colours.dark_app_main,
+          ),
         ],
         [
           LoadAssetImage('home/icon_shop', width: _imageSize),
-          LoadAssetImage('home/icon_shop', width: _imageSize, color: Colours.dark_app_main,),
+          LoadAssetImage(
+            'home/icon_shop',
+            width: _imageSize,
+            color: Colours.dark_app_main,
+          ),
         ]
       ];
 
@@ -118,35 +164,34 @@ class _HomeState extends State<Home> with RestorationMixin{
   @override
   Widget build(BuildContext context) {
     final bool isDark = context.isDark;
-    return ChangeNotifierProvider<HomeProvider>(
+    return ChangeNotifierProvider<ConchHomeProvider>(
       create: (_) => provider,
       child: DoubleTapBackExitApp(
         child: Scaffold(
-          bottomNavigationBar: Consumer<HomeProvider>(
-            builder: (_, provider, __) {
-              return BottomNavigationBar(
-                backgroundColor: context.backgroundColor,
-                items: isDark ? _buildDarkBottomNavigationBarItem() : _buildBottomNavigationBarItem(),
-                type: BottomNavigationBarType.fixed,
-                currentIndex: provider.value,
-                elevation: 5.0,
-                iconSize: 21.0,
-                selectedFontSize: Dimens.font_sp10,
-                unselectedFontSize: Dimens.font_sp10,
-                selectedItemColor: Theme.of(context).primaryColor,
-                unselectedItemColor: isDark ? Colours.dark_unselected_item_color : Colours.unselected_item_color,
-                onTap: (index) => _pageController.jumpToPage(index),
-              );
-            },
-          ),
-          // 使用PageView的原因参看 https://zhuanlan.zhihu.com/p/58582876
-          body: PageView(
-            physics: const NeverScrollableScrollPhysics(), // 禁止滑动
-            controller: _pageController,
-            onPageChanged: (int index) => provider.value = index,
-            children: _pageList,
-          )
-        ),
+            bottomNavigationBar: Consumer<ConchHomeProvider>(
+              builder: (_, provider, __) {
+                return BottomNavigationBar(
+                  backgroundColor: context.backgroundColor,
+                  items: isDark ? _buildDarkBottomNavigationBarItem() : _buildBottomNavigationBarItem(),
+                  type: BottomNavigationBarType.fixed,
+                  currentIndex: provider.value,
+                  elevation: 5.0,
+                  iconSize: 21.0,
+                  selectedFontSize: Dimens.font_sp10,
+                  unselectedFontSize: Dimens.font_sp10,
+                  selectedItemColor: Theme.of(context).primaryColor,
+                  unselectedItemColor: isDark ? Colours.dark_unselected_item_color : Colours.unselected_item_color,
+                  onTap: (index) => _pageController.jumpToPage(index),
+                );
+              },
+            ),
+            // 使用PageView的原因参看 https://zhuanlan.zhihu.com/p/58582876
+            body: PageView(
+              physics: const NeverScrollableScrollPhysics(), // 禁止滑动
+              controller: _pageController,
+              onPageChanged: (int index) => provider.value = index,
+              children: _pageList,
+            )),
       ),
     );
   }
@@ -154,9 +199,9 @@ class _HomeState extends State<Home> with RestorationMixin{
   @override
   String? get restorationId => 'home';
 
-  @override
-  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
-    registerForRestoration(provider, 'BottomNavigationBarCurrentIndex');
-  }
+// @override
+// void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
+//   registerForRestoration(provider, 'BottomNavigationBarCurrentIndex');
+// }
 
 }

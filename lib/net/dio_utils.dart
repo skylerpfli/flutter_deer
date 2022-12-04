@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_deer/net/isolate_callback.dart';
 import 'package:flutter_deer/res/constant.dart';
 import 'package:flutter_deer/util/log_utils.dart';
 import 'base_entity.dart';
@@ -186,9 +187,6 @@ class DioUtils {
   }
 }
 
-Map<String, dynamic> parseData(String data) {
-  return json.decode(data) as Map<String, dynamic>;
-}
 
 enum Method {
   get,
