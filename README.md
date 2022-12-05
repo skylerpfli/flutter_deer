@@ -1,3 +1,8 @@
+**Conch热更新体验工程**
+
+切换到conchDynamic分支进行体验，使用参照 https://git.woa.com/flutter_components/FlutterDynamic/conch-demo
+
+---
 # Flutter Deer
 
 <img src="preview/logo.jpg"/>
