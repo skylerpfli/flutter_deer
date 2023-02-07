@@ -39,7 +39,6 @@ Future<void> main() async {
   if (useConch) {
     var source = await rootBundle.loadString('assets/conch_data/conch_result.json');
     ConchDispatch.instance.loadSource(source);
-    // ConchDispatch.instance.setLogger(LogLevel.Debug);
     return await ConchDispatch.instance.callStaticFun(library: 'package:flutter_deer/main.dart', funcName: 'mainInner');
   }
   await mainInner();
