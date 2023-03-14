@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_conch_plugin/annotation/conch_scope.dart';
+import 'package:flutter_conch_plugin/annotation/patch_scope.dart';
 import 'package:flutter_conch_plugin/conch_dispatch.dart';
 import 'package:flutter_deer/demo/demo_page.dart';
 import 'package:flutter_deer/home/splash_page.dart';
@@ -26,7 +26,7 @@ import 'package:flutter_deer/main.dart';
 
 bool useConch = true;
 
-@ConchScope()
+@PatchScope()
 Future<void> main() async {
 //  debugProfileBuildsEnabled = true;
 //  debugPaintLayerBordersEnabled = true;

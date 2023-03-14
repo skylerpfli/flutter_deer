@@ -79,10 +79,7 @@ dependencies:
   lottie: 1.4.1
 
   flutter_conch_plugin:
-    hosted:
-      name: flutter_conch_plugin
-      url: http://pub.oa.com
-    version: 1.1.5
+    path: /Users/lipengfei/conch/conch-plugin
 
 
 # https://github.com/simplezhli/flutter_deer/issues/187
@@ -130,8 +127,8 @@ flutter:
     - assets/images/account/
     - assets/images/statistic/
     - assets/lottie/
-    - assets/conch_build/patch_json/
-    - assets/conch_build/patch_dat/
+#    - assets/conch_build/patch_json/
+#    - assets/conch_build/patch_dat/
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
@@ -146,4 +143,5 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 
 conch:
+  enable: true
   outPath: ./assets
