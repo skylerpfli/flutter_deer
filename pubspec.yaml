@@ -79,7 +79,10 @@ dependencies:
   lottie: 1.4.1
 
   flutter_conch_plugin:
-    path: /Users/lipengfei/conch/conch-plugin
+    hosted:
+      name: flutter_conch_plugin
+      url: http://pub.oa.com
+    version: 1.1.6
 
 
 # https://github.com/simplezhli/flutter_deer/issues/187
